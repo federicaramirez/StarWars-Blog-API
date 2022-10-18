@@ -37,11 +37,26 @@ def get_user_all():
 
     print (all_users)
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
+    results = list(map(lambda item: item.serialize(), all_users))
 
-    return jsonify(response_body), 200
+    return jsonify(results), 200
+
+@app.route('/user/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+
+#En este caso no necesita mapear, muestra uno solo.
+    usuario = User.query.filter_by(id = user_id).first()
+    print(usuario)
+   
+    return jsonify(usuario.serialize()) , 200
+
+
+
+
+
+
+
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
