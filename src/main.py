@@ -30,8 +30,12 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-@app.route('/user', methods=['GET'])
-def handle_hello():
+@app.route('/users', methods=['GET'])
+def get_user_all():
+
+    all_users = User.query.all()
+
+    print (all_users)
 
     response_body = {
         "msg": "Hello, this is your GET /user response "
